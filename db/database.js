@@ -58,12 +58,13 @@ const addUser = function (user) {
   return pool
   .query(`
     INSERT INTO users (name, email, password)
-    VALUES ($1, $2, $3);
-    RETURN *;
+    VALUES ($1, $2, $3)
+    RETURNING *;
     `,
     [user.name, user.email, user.password]
   ).then((result) => {
-    return (result.rows.length > 0) ? result.rows[0].id : null; 
+    console.log(result);
+    return (result.rows.length > 0) ? result.rows[0] : null; 
   })
   .catch((err) => {
     console.log(err.message);
