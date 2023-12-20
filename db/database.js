@@ -145,8 +145,6 @@ const getAllProperties = function (options, limit = 10) {
     queryParams.push(options.minimum_rating);
     ratingQuery = `HAVING AVG(rating) >= $${queryParams.length}`;
   }
-  console.log(queryParams);
-  console.log(queryConditions);
   return pool
   .query(
     `SELECT 
